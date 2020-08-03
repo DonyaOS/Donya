@@ -1,6 +1,6 @@
 # Donya OS
 
-Donya OS is a Operation system. A kind of Linux distribution built using package management system. Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
+Donya OS is a Operating System. A kind of Linux distribution built using package management system. Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
  
 ### Contribution
 
