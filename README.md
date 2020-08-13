@@ -2,7 +2,9 @@
 
 DonyaOS is a Operating System. A kind of Linux distribution built using package management system. Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
 
-> This Linux distribution is not yet ready and complete and we need the help of others. (Please message if are you interested: [Max Base](https://github.com/basemax))
+**Join team by send a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
+
+> This Linux distribution is not yet ready and complete and we need the help of others.
 
 ![Donya OS](demo.jpg)
 
