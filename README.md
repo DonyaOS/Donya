@@ -1,17 +1,20 @@
 # Donya OS
 
-Donya OS is a Operating System. A kind of Linux distribution built using package management system. Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
+DonyaOS is a Operating System. A kind of Linux distribution built using package management system. Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
 
 > This Linux distribution is not yet ready and complete and we need the help of others. (Please message if are you interested: [Max Base](https://github.com/basemax))
+
+![Donya OS](demo.jpg)
+
+### Demo Video
+
+![DonyaOS in VirtualBox](demo.gif)
 
 ### Preparation
 
 ```
-cd pack/
-...Download dependency files and decompress...
-bash build.sh
-bash kernel.sh
-bash run.sh
+...Download dependency files and decompress or uncomment from donya.sh...
+bash donya.sh
 ```
 
 ### Contribution
