@@ -10,6 +10,8 @@ DonyaOS is a Operating System. A kind of Linux distribution built using package 
 
 ![DonyaOS in VirtualBox](demo.gif)
 
+Produced ISO file: [DonyaOS.iso](DonyaOS.iso) (In development mode)
+
 ### Preparation
 
 ```
