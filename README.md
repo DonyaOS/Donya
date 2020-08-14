@@ -37,6 +37,37 @@ route add default gw 10.0.2.2
 ![ping](network.gif)
 
 
+### Commands
+
+Currently available applets include:
+
+```
+[, [[, adjtimex, ar, arp, arping, ash, awk, basename, blockdev,
+brctl, bunzip2, bzcat, bzip2, cal, cat, chgrp, chmod, chown, chroot,
+chvt, clear, cmp, cp, cpio, crond, crontab, cttyhack, cut, date, dc,
+dd, deallocvt, depmod, df, diff, dirname, dmesg, dnsdomainname,
+dos2unix, dpkg, dpkg-deb, du, dumpkmap, dumpleases, echo, ed, egrep,
+env, expand, expr, false, fdisk, fgrep, find, fold, free,
+freeramdisk, ftpget, ftpput, getopt, getty, grep, groups, gunzip,
+gzip, halt, head, hexdump, hostid, hostname, httpd, hwclock, id,
+ifconfig, ifdown, ifup, init, insmod, ionice, ip, ipcalc, kill,
+killall, klogd, last, less, ln, loadfont, loadkmap, logger, login,
+logname, logread, losetup, ls, lsmod, lzcat, lzma, md5sum, mdev,
+microcom, mkdir, mkfifo, mknod, mkswap, mktemp, modinfo, modprobe,
+more, mount, mt, mv, nameif, nc, netstat, nslookup, od, openvt,
+passwd, patch, pidof, ping, ping6, pivot_root, poweroff, printf, ps,
+pwd, rdate, readlink, realpath, reboot, renice, reset, rev, rm,
+rmdir, rmmod, route, rpm, rpm2cpio, run-parts, sed, seq,
+setkeycodes, setsid, sh, sha1sum, sha256sum, sha512sum, sleep, sort,
+start-stop-daemon, stat, static-sh, strings, stty, su, sulogin,
+swapoff, swapon, switch_root, sync, sysctl, syslogd, tac, tail, tar,
+taskset, tee, telnet, telnetd, test, tftp, time, timeout, top,
+touch, tr, traceroute, traceroute6, true, tty, tunctl, udhcpc,
+udhcpd, umount, uname, uncompress, unexpand, uniq, unix2dos, unlzma,
+unxz, unzip, uptime, usleep, uudecode, uuencode, vconfig, vi, watch,
+watchdog, wc, wget, which, who, whoami, xargs, xz, xzcat, yes, zcat
+```
+
 ### Contribution
 
 Please make sure to read the Contributing Guide before making a pull request. If you have a Donya-related project/feature/tool, add it with a pull request to this curated list!
