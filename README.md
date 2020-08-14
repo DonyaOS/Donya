@@ -1,13 +1,12 @@
 # Donya OS
 
-DonyaOS is a Operating System. A kind of Linux distribution built using package management system. Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
+Donya is an Operating system. Yet Another Linux distro built using package management system.
 
+Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
 
-Based on an original works [Minimal Linux Script ](https://github.com/ivandavidov/minimal-linux-script) by [John Davidson](https://github.com/ivandavidov)
+Based on an original works [Minimal Linux Script](https://github.com/ivandavidov/minimal-linux-script) by [John Davidson](https://github.com/ivandavidov)
 
-**Join team by send a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
-
-> This Linux distribution is not yet ready and complete and we need the help of others.
+> This Linux distribution is not yet ready, we need the help of others.
 
 ![Donya OS](demo.jpg)
 
@@ -73,6 +72,8 @@ watchdog, wc, wget, which, who, whoami, xargs, xz, xzcat, yes, zcat
 Please make sure to read the Contributing Guide before making a pull request. If you have a Donya-related project/feature/tool, add it with a pull request to this curated list!
 
 Thank you to all the people who already contributed to DonyaOS!
+
+**Join team by send a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
 
 ### License
 
