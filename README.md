@@ -4,8 +4,6 @@ Donya is an Operating system. Yet Another Linux distro built using package manag
 
 Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
 
-Based on an original works [Minimal Linux Script](https://github.com/ivandavidov/minimal-linux-script) by [John Davidson](https://github.com/ivandavidov)
-
 > This Linux distribution is not yet ready, we need the help of others.
 
 ![Donya OS](demo.jpg)
@@ -75,8 +73,14 @@ Thank you to all the people who already contributed to DonyaOS!
 
 **Join team by send a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
 
+### Team members
+
+EsmaeelE, Prince Kumar, Emil Sayahi, Iniubong Obonguko, Hooman, and Max Base
+
 ### License
 
 **MIT**
+
+Inspired on an original works [Minimal Linux Script](https://github.com/ivandavidov/minimal-linux-script) by [John Davidson](https://github.com/ivandavidov)
 
 Copyright (c) 2020-present, Max Base
