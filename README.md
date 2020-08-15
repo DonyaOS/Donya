@@ -4,7 +4,7 @@ Donya is an Operating system. Yet Another Linux distro built using package manag
 
 Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
 
-> This Linux distribution is not yet ready, we need the help of others.
+> This Linux distribution is not yet ready, we need the help of others.  **Join team by send a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
 
 ![Donya OS](demo.jpg)
 
