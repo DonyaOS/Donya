@@ -97,13 +97,15 @@ echo "generate rootfs"
 cd _install
 rm -f linuxrc
 
-mkdir -p dev proc sys
+mkdir -p dev proc sys media
 
 echo '#!/bin/sh' > init
 echo 'dmesg -n 1' >> init
 echo 'mount -t devtmpfs none /dev' >> init
 echo 'mount -t proc none /proc' >> init
 echo 'mount -t sysfs none /sys' >> init
+# mounting /dev/sda at /media 
+echo 'mount /dev/sda /media'>>init
 echo 'setsid cttyhack /bin/sh' >> init
 
 chmod +x init
