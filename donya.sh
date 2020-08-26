@@ -1,3 +1,4 @@
+#!/bin/bash
 
 ############################################################################################
 
@@ -11,15 +12,11 @@
 ############################################################################################
 
 
-# !/bin/bash
-
-base_dir=`pwd`
+base_dir=$(pwd)
 
 
 ## Create directories
-mkdir -p ${base_dir}/packages
-mkdir -p ${base_dir}/extracted
-mkdir -p ${base_dir}/iso
+mkdir -p "$base_dir"/{packages,extracted,iso}
 
 
 ############################################################################################
@@ -32,9 +29,9 @@ mkdir -p ${base_dir}/iso
 #download_package.sh
 ####################################################################################
 
-# wget https://kernel.org/pub/linux/kernel/v5.x/linux-5.8.tar.xz
-# wget http://busybox.net/downloads/busybox-1.32.0.tar.bz2
-# wget http://kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.xz
+# wget https://kernel.org/pub/linux/kernel/v5.x/linux-5.8.tar.xz -P "$base_dir/packages/"
+# wget http://busybox.net/downloads/busybox-1.32.0.tar.bz2 -P "$base_dir/packages/"
+# wget http://kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.xz -P "$base_dir/packages/"
 
 
 ############################################################################################
@@ -44,16 +41,16 @@ mkdir -p ${base_dir}/iso
 
 
 # busybox
-mkdir -p ${base_dir}/extracted/busybox
-tar -xvf ${base_dir}/packages/busybox-1.32.0.tar.bz2 -C ${base_dir}/extracted/busybox
+mkdir -p "$base_dir/extracted/busybox" && \
+tar -xvf "$base_dir/packages/busybox-1.32.0.tar.bz2" -C "$base_dir/extracted/busybox"
 
 # linux
-mkdir -p ${base_dir}/extracted/linux
-tar -xvf ${base_dir}/packages/linux-5.8.tar.xz -C ${base_dir}/extracted/linux
+mkdir -p "$base_dir/extracted/linux" && \
+tar -xvf "$base_dir/packages/linux-5.8.tar.xz" -C "$base_dir/extracted/linux"
 
 # syslinux
-mkdir -p ${base_dir}/extracted/syslinux
-tar -xvf ${base_dir}/packages/syslinux-6.03.tar.xz -C ${base_dir}/extracted/syslinux
+mkdir -p "$base_dir/extracted/syslinux" && \
+tar -xvf "$base_dir/packages/syslinux-6.03.tar.xz" -C "$base_dir/extracted/syslinux"
 
 
 ############################################################################################
@@ -70,7 +67,7 @@ tar -xvf ${base_dir}/packages/syslinux-6.03.tar.xz -C ${base_dir}/extracted/sysl
 
 echo "compiling busybox"
 
-cd ${base_dir}/extracted/busybox/*
+cd "$base_dir/extracted/busybox/"* || exit 1
 
 make distclean
 make defconfig
@@ -94,23 +91,23 @@ echo "Finish compiling busybox"
 
 echo "generate rootfs"
 
-cd _install
+cd _install || exit 1
 rm -f linuxrc
 
 mkdir -p dev proc sys media
 
-echo '#!/bin/sh' > init
-echo 'dmesg -n 1' >> init
-echo 'mount -t devtmpfs none /dev' >> init
-echo 'mount -t proc none /proc' >> init
-echo 'mount -t sysfs none /sys' >> init
+cat << EOF > init && chmod +x init
+#!/bin/sh
+dmesg -n 1
+mount -t devtmpfs none /dev
+mount -t proc none /proc
+mount -t sysfs none /sys
 # mounting /dev/sda at /media 
-echo 'mount /dev/sda /media'>>init
-echo 'setsid cttyhack /bin/sh' >> init
+mount /dev/sda /media
+setsid cttyhack /bin/sh
+EOF
 
-chmod +x init
-
-find . | cpio -R root:root -H newc -o | gzip > ${base_dir}/iso/rootfs.gz
+find . | cpio -R root:root -H newc -o | gzip > "$base_dir/iso/rootfs.gz"
 
 echo "rootfs generation finished..."
 
@@ -128,9 +125,9 @@ echo "rootfs generation finished..."
 
 echo "########Compile linux##########"
 
-cd ${base_dir}/extracted
+cd "$base_dir/extracted" || exit 1
 
-cd linux/*
+cd linux/* || exit 1
 
 # How to speedup compilation?
 
@@ -140,7 +137,7 @@ cd linux/*
 
 make -j4 mrproper defconfig bzImage
 
-cp arch/x86/boot/bzImage ${base_dir}/iso/kernel.gz
+cp arch/x86/boot/bzImage "$base_dir/iso/kernel.gz"
 
 echo "########## finished ##########"
 
@@ -155,12 +152,12 @@ echo "########## finished ##########"
 
 echo "########## busybox, create isolinux.cfg ##########"
 
-cp ${base_dir}/extracted/syslinux/*/bios/core/isolinux.bin ${base_dir}/iso/
-cp ${base_dir}/extracted/syslinux/*/bios/com32/elflink/ldlinux/ldlinux.c32 ${base_dir}/iso/
+cp "$base_dir/extracted/syslinux/*/bios/core/isolinux.bin" "$base_dir/iso/"
+cp "$base_dir/extracted/syslinux/*/bios/com32/elflink/ldlinux/ldlinux.c32" "$base_dir/iso/"
 
-echo 'default kernel.gz initrd=rootfs.gz' > ${base_dir}/iso/isolinux.cfg
+echo 'default kernel.gz initrd=rootfs.gz' > "$base_dir/iso/isolinux.cfg"
 
-echo "########## Finsihed ##########"
+echo "########## Finished ##########"
 
 
 ############################################################################################
@@ -173,13 +170,13 @@ echo "########## Finsihed ##########"
 ############################################################################################
 
 
-cd ${base_dir}/iso
+cd "$base_dir/iso" || exit 1
 
 echo "########## Make iso ##########"
 
 xorriso \
     -as mkisofs \
-    -o ${base_dir}/donyaOS.iso \
+    -o "$base_dir/donyaOS.iso" \
     -b isolinux.bin \
     -c boot.cat \
     -no-emul-boot \
