@@ -23,7 +23,7 @@ bash donya.sh
 
 ## Network
 
-***Configure on VirtulaBox***
+***Configure on VirtualBox***
 
 ```
 ifconfig eth0 10.0.2.16 netmask 255.255.255.0
