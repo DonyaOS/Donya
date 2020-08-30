@@ -1,9 +1,10 @@
-name: Lint Markdown
+name: Lint
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  markdownlint:
+    name: Markdownlint
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -13,3 +14,10 @@ jobs:
           node-version: '12.x'
       - run: npm install -g markdownlint-cli@0.23.2
       - run: markdownlint '**/*.md' --ignore node_modules
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
