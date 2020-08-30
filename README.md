@@ -1,5 +1,13 @@
 # Donya OS
 
+- [Demo Video](#demo-video)
+- [Preparation](#preparation)
+- [Network](#network)
+- [Commands](#commands)
+- [Contribution](#contribution)
+- [Team members](#team-members)
+- [License](#license)
+
 Donya is an Operating system. Yet Another Linux distro built using package management system.
 
 Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
@@ -65,7 +73,7 @@ watchdog, wc, wget, which, who, whoami, xargs, xz, xzcat, yes, zcat
 
 ## Contribution
 
-Please make sure to read the Contributing Guide before making a pull request. If you have a Donya-related project/feature/tool, add it with a pull request to this curated list!
+Please make sure to read the [Contributing Guide](CONTRIBUTING.md) before making a pull request. If you have a Donya-related project/feature/tool, add it with a pull request to this curated list!
 
 Thank you to all the people who already contributed to DonyaOS!
 
