@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   markdownlint:
-    name: Markdownlint
+    name: 🧹 Markdown Lint
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -15,14 +15,14 @@ jobs:
       - run: npm install -g markdownlint-cli@0.23.2
       - run: markdownlint '**/*.md' --ignore node_modules
   shellcheck:
-    name: Shellcheck
+    name: 🧹 Shellcheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
   yamllint:
-    name: Yamllint
+    name: 🧹 YAML Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
