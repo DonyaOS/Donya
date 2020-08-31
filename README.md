@@ -1,5 +1,9 @@
 # Donya OS
 
+[![MIT License](https://img.shields.io/github/license/DonyaOS/Donya?color=brightgreen)](LICENSE)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DonyaOS/Donya/Lint?label=Linter)
+![IRC chat on freenode](https://img.shields.io/badge/IRC-%23DonyaOS-brightgreen)
+
 - [Demo Video](#demo-video)
 - [Preparation](#preparation)
 - [Network](#network)
@@ -14,11 +18,11 @@ Unlike a binary software distribution, the source code is compiled locally accor
 
 > This Linux distribution is not yet ready, we need the help of others.  **Join team by send a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
 
-![Donya OS](demo.jpg)
+![Donya OS](images/demo.jpg)
 
 ## Demo Video
 
-![DonyaOS in VirtualBox](demo.gif)
+![DonyaOS in VirtualBox](images/demo.gif)
 
 Produced ISO file: [DonyaOS.iso](DonyaOS.iso) (In development mode)
 
@@ -38,7 +42,7 @@ ifconfig eth0 10.0.2.16 netmask 255.255.255.0
 route add default gw 10.0.2.2
 ```
 
-![ping](network.gif)
+![ping](images/network.gif)
 
 ## Commands
 
@@ -85,8 +89,6 @@ EsmaeelE, Prince Kumar, Emil Sayahi, Iniubong Obonguko, Hooman and Max Base
 
 ## License
 
-[![MIT License](https://img.shields.io/github/license/DonyaOS/Donya)](LICENSE)
-
 Inspired on an original works [Minimal Linux Script](https://github.com/ivandavidov/minimal-linux-script) by [John Davidson](https://github.com/ivandavidov)
 
-Copyright (c) 2020-present, Max Base
+MIT License Copyright (c) 2020-present, Max Base
