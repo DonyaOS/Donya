@@ -1,0 +1,10 @@
+binutils-2.35.tar.xz
+busybox-1.32.0.tar.bz2
+clfs-embedded-bootscripts-1.0-pre5.tar.bz2
+gcc-10.2.0.tar.xz
+glibc-2.32.tar.xz
+gmp-6.2.0.tar.xz
+linux-5.8.tar.xz
+mpc-1.1.0.tar.gz
+mpfr-4.1.0.tar.xz
+zlib-1.2.11.tar.gz
