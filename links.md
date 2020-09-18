@@ -15,3 +15,5 @@
 [Build Your Own Linux](http://www.buildyourownlinux.com/)
 
 [Build yourself a Linux](https://github.com/MichielDerhaeg/build-linux)
+
+[software that sucks less](http://suckless.org/)
