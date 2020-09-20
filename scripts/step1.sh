@@ -1,3 +1,7 @@
+
+
+# all scripts must contain first line empty, as use cat to concatenate them
+
 # 1.  Configuring the Environment
 
 # turn on Bash hash functions
@@ -6,50 +10,50 @@ set +h
 # Make sure that newly created files/directories are writable only by the owner (for example, the currently logged in user account)
 umask 022
 
-#  Use your home directory as the main build directory
-export LJOS=~/LJOS
-mkdir -pv ${LJOS}
+#  Use your current directory as the main build directory
+export donyaOS=$(pwd)/donyaOS
+mkdir -pv ${donyaOS}
 
 export LC_ALL=POSIX
-export PATH=${LJOS}/cross-tools/bin:/bin:/usr/bin
+export PATH=${donyaOS}/cross-tools/bin:/bin:/usr/bin
 
 
 # Create the target image's filesystem hierarchy
 # This directory tree is based on the Filesystem Hierarchy Standard (FHS), which is defined and hosted by the Linux Foundation
 
 
-mkdir -pv ${LJOS}/{bin,boot{,grub},dev,{etc/,}opt,home,lib/{firmware,modules},lib64,mnt}
-mkdir -pv ${LJOS}/{proc,media/{floppy,cdrom},sbin,srv,sys}
-mkdir -pv ${LJOS}/var/{lock,log,mail,run,spool}
-mkdir -pv ${LJOS}/var/{opt,cache,lib/{misc,locate},local}
+mkdir -pv ${donyaOS}/{bin,boot{,grub},dev,{etc/,}opt,home,lib/{firmware,modules},lib64,mnt}
+mkdir -pv ${donyaOS}/{proc,media/{floppy,cdrom},sbin,srv,sys}
+mkdir -pv ${donyaOS}/var/{lock,log,mail,run,spool}
+mkdir -pv ${donyaOS}/var/{opt,cache,lib/{misc,locate},local}
 
-install -dv -m 0750 ${LJOS}/root
-install -dv -m 1777 ${LJOS}{/var,}/tmp
-install -dv ${LJOS}/etc/init.d
+install -dv -m 0750 ${donyaOS}/root
+install -dv -m 1777 ${donyaOS}{/var,}/tmp
+install -dv ${donyaOS}/etc/init.d
 
-mkdir -pv ${LJOS}/usr/{,local/}{bin,include,lib{,64},sbin,src}
-mkdir -pv ${LJOS}/usr/{,local/}share/{doc,info,locale,man}
-mkdir -pv ${LJOS}/usr/{,local/}share/{misc,terminfo,zoneinfo}
-mkdir -pv ${LJOS}/usr/{,local/}share/man/man{1,2,3,4,5,6,7,8}
+mkdir -pv ${donyaOS}/usr/{,local/}{bin,include,lib{,64},sbin,src}
+mkdir -pv ${donyaOS}/usr/{,local/}share/{doc,info,locale,man}
+mkdir -pv ${donyaOS}/usr/{,local/}share/{misc,terminfo,zoneinfo}
+mkdir -pv ${donyaOS}/usr/{,local/}share/man/man{1,2,3,4,5,6,7,8}
 
-for dir in ${LJOS}/usr{,/local}; do
+for dir in ${donyaOS}/usr{,/local}; do
     ln -sv share/{man,doc,info} ${dir}
 done
 
 
 # Create the directory for a cross-compilation toolchain
-install -dv ${LJOS}/cross-tools{,/bin}
+install -dv ${donyaOS}/cross-tools{,/bin}
 
 # Use a symlink to /proc/mounts to maintain a list of mounted filesystems properly in the /etc/mtab file
-ln -svf ../proc/mounts ${LJOS}/etc/mtab
+ln -svf /proc/mounts ${donyaOS}/etc/mtab
 
 # Then create the /etc/passwd file, listing the root user account (note: for now, you won't be setting the account password; you'll do that after booting up into the target image for the first time)
-cat > ${LJOS}/etc/passwd << "EOF"
+cat > ${donyaOS}/etc/passwd << "EOF"
 root::0:0:root:/root:/bin/ash
 EOF
 
 # Create the /etc/group file with the following command: 
-cat > ${LJOS}/etc/group << "EOF"
+cat > ${donyaOS}/etc/group << "EOF"
 root:x:0:
 bin:x:1:
 sys:x:2:
@@ -64,7 +68,7 @@ usb:x:14:
 EOF
 
 # The target system's /etc/fstab
-cat > ${LJOS}/etc/fstab << "EOF"
+cat > ${donyaOS}/etc/fstab << "EOF"
 # file system  mount-point  type   options          dump  fsck
 #                                                         order
 
@@ -76,7 +80,7 @@ tmpfs           /dev/shm        tmpfs   defaults        0      0
 EOF
 
 # The target system's /etc/profile to be used by the Almquist shell (ash) once the user is logged in to the target machine
-cat > ${LJOS}/etc/profile << "EOF"
+cat > ${donyaOS}/etc/profile << "EOF"
 export PATH=/bin:/usr/bin
 
 if [ `id -u` -eq 0 ] ; then
@@ -96,12 +100,12 @@ export EDITOR='/bin/vi'
 EOF
 
 # The target machine's hostname (you can change this any time): 
-echo "LJOS-test" > ${LJOS}/etc/HOSTNAME
+echo "donyaOS-machine" > ${donyaOS}/etc/HOSTNAME
 
 
 # And, /etc/issue, which will be displayed prominently at the login prompt: 
-cat > ${LJOS}/etc/issue<< "EOF"
-Linux Journal OS 0.1a
+cat > ${donyaOS}/etc/issue<< "EOF"
+donyaOS 0.001a
 Kernel \r on an \m
 
 EOF
@@ -109,7 +113,7 @@ EOF
 
 # You won't use systemd here (this wasn't a political decision; it's due to convenience and for simplicity's sake). Instead, you'll use the basic init process provided by BusyBox. This requires that you define an /etc/inittab file: 
 
-cat > ${LJOS}/etc/inittab<< "EOF"
+cat > ${donyaOS}/etc/inittab<< "EOF"
 ::sysinit:/etc/rc.d/startup
 
 tty1::respawn:/sbin/getty 38400 tty1
@@ -125,7 +129,7 @@ EOF
 
 # Also as a result of leveraging BusyBox to simplify some of the most common Linux system functionality # you'll use mdev instead of udev, which requires you to define the following /etc/mdev.conf file:
 
-cat > ${LJOS}/etc/mdev.conf<< "EOF"
+cat > ${donyaOS}/etc/mdev.conf<< "EOF"
 # Devices:
 # Syntax: %s %d:%d %s
 # devices user:group mode
@@ -192,18 +196,18 @@ EOF
 # You'll need to create a /boot/grub/grub.cfg for the GRUB bootloader that will be installed on the target machine's physical or virtual HDD (note: the kernel image defined in this file needs to reflect the image built and installed on the target machine): 
 
 ### This is what I add
-mkdir ${LJOS}/boot/grub/
+mkdir ${donyaOS}/boot/grub/
 ###$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
-cat > ${LJOS}/boot/grub/grub.cfg<< "EOF"
+cat > ${donyaOS}/boot/grub/grub.cfg<< "EOF"
 
 set default=0
 set timeout=5
 
 set root=(hd0,1)
 
-menuentry "Linux Journal OS 0.1a" {
+menuentry "donyaOS 0.001a" {
         linux   /boot/vmlinuz-5.8.0 root=/dev/sda1 ro quiet
 }
 EOF
@@ -211,5 +215,5 @@ EOF
 
 # Finally, initialize the log files and give them proper permissions: 
 
-touch ${LJOS}/var/run/utmp ${LJOS}/var/log/{btmp,lastlog,wtmp}
-chmod -v 664 ${LJOS}/var/run/utmp ${LJOS}/var/log/lastlog
+touch ${donyaOS}/var/run/utmp ${donyaOS}/var/log/{btmp,lastlog,wtmp}
+chmod -v 664 ${donyaOS}/var/run/utmp ${donyaOS}/var/log/lastlog
