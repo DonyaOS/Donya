@@ -1,3 +1,6 @@
+
+
+
 # 2. Build the Cross Compiler
 
 
@@ -48,11 +51,11 @@ unset CXXFLAGS
 
 # define the most vital parts of the host/target variables needed to create the cross-compiler toolchain and target image:
 
-export LJOS_HOST=$(echo ${MACHTYPE} | sed "s/-[^-]*/-cross/")
-export LJOS_TARGET=x86_64-unknown-linux-gnu
-export LJOS_CPU=k8
-export LJOS_ARCH=$(echo ${LJOS_TARGET} | sed -e 's/-.*//' -e 's/i.86/i386/')
-export LJOS_ENDIAN=little
+export donyaOS_HOST=$(echo ${MACHTYPE} | sed "s/-[^-]*/-cross/")
+export donyaOS_TARGET=x86_64-unknown-linux-gnu
+export donyaOS_CPU=k8
+export donyaOS_ARCH=$(echo ${donyaOS_TARGET} | sed -e 's/-.*//' -e 's/i.86/i386/')
+export donyaOS_ENDIAN=little
 
 ###########################################################################
 
@@ -77,10 +80,10 @@ export MAKEFLAGS="-j$((NB_CORES+1)) -l${NB_CORES}"
 # make clean
 
 make mrproper 
-make ARCH=${LJOS_ARCH} headers_check
-make ARCH=${LJOS_ARCH} INSTALL_HDR_PATH=dest headers_install
+make ARCH=${donyaOS_ARCH} headers_check
+make ARCH=${donyaOS_ARCH} INSTALL_HDR_PATH=dest headers_install
 
-cp -rv dest/include/* ${LJOS}/usr/include
+cp -rv dest/include/* ${donyaOS}/usr/include
 ############################################
 
 
@@ -96,20 +99,18 @@ cd "$base_dir/extracted" || exit 1
 mkdir binutils-build
 cd binutils-build/
 
-../binutils-2.35/configure --prefix=${LJOS}/cross-tools \
---target=${LJOS_TARGET} --with-sysroot=${LJOS} \
+../binutils-2.35/configure --prefix=${donyaOS}/cross-tools \
+--target=${donyaOS_TARGET} --with-sysroot=${donyaOS} \
 --disable-nls --enable-shared --disable-multilib
 
 make configure-host && make
 
-ln -sv lib ${LJOS}/cross-tools/lib64
+ln -sv lib ${donyaOS}/cross-tools/lib64
 
 make install
 
-
 # Copy over the following header file to the target's filesystem:
-cp -v ../binutils-2.35/include/libiberty.h ${LJOS}/usr/include
-
+cp -v ../binutils-2.35/include/libiberty.h ${donyaOS}/usr/include
 
 #GCC (Static)
 
@@ -119,40 +120,37 @@ cp -v ../binutils-2.35/include/libiberty.h ${LJOS}/usr/include
 
 cd "$base_dir/extracted" || exit 1
 
-
 mv gmp* gcc-10.2.0/gmp
 mv mpfr* gcc-10.2.0/mpfr
 mv mpc* gcc-10.2.0/mpc
 
-
 mkdir gcc-static
 cd gcc-static/
 
-AR=ar LDFLAGS="-Wl,-rpath,${LJOS}/cross-tools/lib" \
-../gcc-10.2.0/configure --prefix=${LJOS}/cross-tools \
---build=${LJOS_HOST} --host=${LJOS_HOST} \
---target=${LJOS_TARGET} \
---with-sysroot=${LJOS}/target --disable-nls \
+AR=ar LDFLAGS="-Wl,-rpath,${donyaOS}/cross-tools/lib" \
+../gcc-10.2.0/configure --prefix=${donyaOS}/cross-tools \
+--build=${donyaOS_HOST} --host=${donyaOS_HOST} \
+--target=${donyaOS_TARGET} \
+--with-sysroot=${donyaOS}/target --disable-nls \
 --disable-shared \
 --with-mpfr-include=$(pwd)/../gcc-10.2.0/mpfr/src \
 --with-mpfr-lib=$(pwd)/mpfr/src/.libs \
 --without-headers --with-newlib --disable-decimal-float \
 --disable-libgomp --disable-libmudflap --disable-libssp \
 --disable-threads --enable-languages=c,c++ \
---disable-multilib --with-arch=${LJOS_CPU}
+--disable-multilib --with-arch=${donyaOS_CPU}
 
 
 make all-gcc all-target-libgcc && \
 make install-gcc install-target-libgcc
 
-ln -vs libgcc.a `${LJOS_TARGET}-gcc -print-libgcc-file-name | sed 's/libgcc/&_eh/'`
+ln -vs libgcc.a `${donyaOS_TARGET}-gcc -print-libgcc-file-name | sed 's/libgcc/&_eh/'`
 
 # Glibc
 
 # Uncompress the glibc tarball. Then create the glibc-build directory and change into it: 
 
 cd "$base_dir/extracted" || exit 1
-
 
 mkdir glibc-build
 cd glibc-build/
@@ -165,19 +163,18 @@ echo "libc_cv_ssp=no" >> config.cache
 echo "libc_cv_ssp_strong=no" >> config.cache
 
 
-
-BUILD_CC="gcc" CC="${LJOS_TARGET}-gcc" \
-AR="${LJOS_TARGET}-ar" \
-RANLIB="${LJOS_TARGET}-ranlib" CFLAGS="-O2" \
+BUILD_CC="gcc" CC="${donyaOS_TARGET}-gcc" \
+AR="${donyaOS_TARGET}-ar" \
+RANLIB="${donyaOS_TARGET}-ranlib" CFLAGS="-O2" \
 ../glibc-2.32/configure --prefix=/usr \
---host=${LJOS_TARGET} --build=${LJOS_HOST} \
+--host=${donyaOS_TARGET} --build=${donyaOS_HOST} \
 --disable-profile --enable-add-ons --with-tls \
 --enable-kernel=2.6.32 --with-__thread \
---with-binutils=${LJOS}/cross-tools/bin \
---with-headers=${LJOS}/usr/include \
+--with-binutils=${donyaOS}/cross-tools/bin \
+--with-headers=${donyaOS}/usr/include \
 --cache-file=config.cache
 
-make && make install_root=${LJOS}/ install
+make && make install_root=${donyaOS}/ install
 
 
 # This part problematic but work if copy paste commands
@@ -191,20 +188,20 @@ cd "$base_dir/extracted" || exit 1
 mkdir gcc-build
 cd gcc-build/
 
-AR=ar LDFLAGS="-Wl,-rpath,${LJOS}/cross-tools/lib" \
-../gcc-10.2.0/configure --prefix=${LJOS}/cross-tools \
---build=${LJOS_HOST} --target=${LJOS_TARGET} \
---host=${LJOS_HOST} --with-sysroot=${LJOS} \
+AR=ar LDFLAGS="-Wl,-rpath,${donyaOS}/cross-tools/lib" \
+../gcc-10.2.0/configure --prefix=${donyaOS}/cross-tools \
+--build=${donyaOS_HOST} --target=${donyaOS_TARGET} \
+--host=${donyaOS_HOST} --with-sysroot=${donyaOS} \
 --disable-nls --enable-shared \
 --enable-languages=c,c++ --enable-c99 \
 --enable-long-long \
 --with-mpfr-include=$(pwd)/../gcc-10.2.0/mpfr/src \
 --with-mpfr-lib=$(pwd)/mpfr/src/.libs \
---disable-multilib --with-arch=${LJOS_CPU}
+--disable-multilib --with-arch=${donyaOS_CPU}
 
 make && make install
 
-cp -v ${LJOS}/cross-tools/${LJOS_TARGET}/lib64/libgcc_s.so.1 ${LJOS}/lib64
+cp -v ${donyaOS}/cross-tools/${donyaOS_TARGET}/lib64/libgcc_s.so.1 ${donyaOS}/lib64
 
 
 ###################################################################################################
