@@ -13,18 +13,16 @@ cd "$base_dir/extracted" || exit 1
 
 cd busybox*
 
-make CROSS_COMPILE="${LJOS_TARGET}-" defconfig
+make CROSS_COMPILE="${donyaOS_TARGET}-" defconfig
 
-make CROSS_COMPILE="${LJOS_TARGET}-"
-make CROSS_COMPILE="${LJOS_TARGET}-" CONFIG_PREFIX="${LJOS}" install
+make CROSS_COMPILE="${donyaOS_TARGET}-"
+make CROSS_COMPILE="${donyaOS_TARGET}-" CONFIG_PREFIX="${donyaOS}" install
 
 
 # Install the following Perl script, as you'll need it for the kernel build below:
 
-cp -v examples/depmod.pl ${LJOS}/cross-tools/bin
-chmod 755 ${LJOS}/cross-tools/bin/depmod.pl
-
-
+cp -v examples/depmod.pl ${donyaOS}/cross-tools/bin
+chmod 755 ${donyaOS}/cross-tools/bin/depmod.pl
 
 
 ## The Linux Kernel
@@ -36,33 +34,30 @@ cd "$base_dir/extracted" || exit 1
 cd linux*
 
 
-make ARCH=${LJOS_ARCH} \
-CROSS_COMPILE=${LJOS_TARGET}- x86_64_defconfig
+make ARCH=${donyaOS_ARCH} \
+CROSS_COMPILE=${donyaOS_TARGET}- x86_64_defconfig
 
 
-make ARCH=${LJOS_ARCH} CROSS_COMPILE=${LJOS_TARGET}-
+make ARCH=${donyaOS_ARCH} CROSS_COMPILE=${donyaOS_TARGET}-
 
-make ARCH=${LJOS_ARCH} CROSS_COMPILE=${LJOS_TARGET}- \
-INSTALL_MOD_PATH=${LJOS} modules_install
+make ARCH=${donyaOS_ARCH} CROSS_COMPILE=${donyaOS_TARGET}- \
+INSTALL_MOD_PATH=${donyaOS} modules_install
 
 
 # You'll need to copy a few files into the /boot directory for GRUB:
 
-cp -v arch/x86/boot/bzImage ${LJOS}/boot/vmlinuz-5.8.0
-cp -v System.map ${LJOS}/boot/System.map-5.8.0
-cp -v .config ${LJOS}/boot/config-5.8.0
+cp -v arch/x86/boot/bzImage ${donyaOS}/boot/vmlinuz-5.8.0
+cp -v System.map ${donyaOS}/boot/System.map-5.8.0
+cp -v .config ${donyaOS}/boot/config-5.8.0
 
 
 # Then run the previously installed Perl script provided by the BusyBox package:
 
-${LJOS}/cross-tools/bin/depmod.pl \
--F ${LJOS}/boot/System.map-5.8.0 \
--b ${LJOS}/lib/modules/5.8.0
+${donyaOS}/cross-tools/bin/depmod.pl \
+-F ${donyaOS}/boot/System.map-5.8.0 \
+-b ${donyaOS}/lib/modules/5.8.0
 
 #####################################################################################
-
-
-
 
 # The Bootscripts 
 
@@ -73,8 +68,8 @@ cd clfs*
 # copy edited Make
 cp $base_dir/Makefile "$base_dir/extracted"/clfs*
 
-make DESTDIR=${LJOS}/ install-bootscripts
-ln -sv ../rc.d/startup ${LJOS}/etc/init.d/rcS
+make DESTDIR=${donyaOS}/ install-bootscripts
+ln -sv ../rc.d/startup ${donyaOS}/etc/init.d/rcS
 
 #####################################################################################
 
@@ -89,15 +84,15 @@ cd zlib*
 
 sed -i 's/-O3/-Os/g' configure
 ./configure --prefix=/usr --shared
-make && make DESTDIR=${LJOS}/ install
+make && make DESTDIR=${donyaOS}/ install
 
 
 # Now, because some packages may look for Zlib libraries in the /lib directory instead of the /lib64 directory, apply the following changes:
 
-mv -v ${LJOS}/usr/lib/libz.so.* ${LJOS}/lib
-ln -svf ../../lib/libz.so.1 ${LJOS}/usr/lib/libz.so
-ln -svf ../../lib/libz.so.1 ${LJOS}/usr/lib/libz.so.1
-ln -svf ../lib/libz.so.1 ${LJOS}/lib64/libz.so.1
+mv -v ${donyaOS}/usr/lib/libz.so.* ${donyaOS}/lib
+ln -svf ../../lib/libz.so.1 ${donyaOS}/usr/lib/libz.so
+ln -svf ../../lib/libz.so.1 ${donyaOS}/usr/lib/libz.so.1
+ln -svf ../lib/libz.so.1 ${donyaOS}/lib64/libz.so.1
 
 
 #####################################################################################
