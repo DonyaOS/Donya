@@ -36,6 +36,9 @@ Just only use compressed package `donyaOS-build.tar.xz`
 Suppose we have another hard disk `sdb` to install donyaOS on it
 Create a 100 MB partition in it.
 
+
+![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
+
 ### Format
 
 `sudo mkfs.ext4 /dev/sdb1`
@@ -53,13 +56,18 @@ Create a 100 MB partition in it.
 
 `sudo grub-install --root-directory="$base_dir"/donya/ /dev/sdb`
 
+
 ### Run with qemu
 
 `sudo qemu-system-x86_64 /dev/sdb`
 
+![Installing DonyaOS Qemu Grub](images/qemu2.jpg)
+
 ### Build from source
 
 `./donya`
+
+![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
 
 ### Preparation
 
@@ -124,6 +132,5 @@ EsmaeelE, Prince Kumar, Emil Sayahi, Iniubong Obonguko, Hooman and Max Base
 
 ## License
 
-Inspired on an original works [Minimal Linux Script](https://github.com/ivandavidov/minimal-linux-script) by [John Davidson](https://github.com/ivandavidov)
-
 MIT License Copyright (c) 2020-present, Max Base
+Donya OS community
