@@ -26,7 +26,6 @@ Unlike a binary software distribution, the source code is compiled locally accor
 
 Produced ISO file: [DonyaOS.iso](DonyaOS.iso) (In development mode)
 
-
 ## DonyaOS Installation guide
 
 ### Install Donya
@@ -35,7 +34,6 @@ Just only use compressed package `donyaOS-build.tar.xz`
 
 Suppose we have another hard disk `sdb` to install donyaOS on it
 Create a 100 MB partition in it.
-
 
 ![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
 
@@ -55,7 +53,6 @@ Create a 100 MB partition in it.
 ### Install grub in MBR
 
 `sudo grub-install --root-directory="$base_dir"/donya/ /dev/sdb`
-
 
 ### Run with qemu
 
