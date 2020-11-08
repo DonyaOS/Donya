@@ -1,0 +1,11 @@
+repos:
+  - repo: local
+    hooks:
+      - id: markdownlint
+        name: Run markdownlint
+        description: "Checks the style of Markdown files."
+        entry: markdownlint
+        language: node
+        types: [markdown]
+        files: \.(md|mdown|markdown)$
+        additional_dependencies: ['markdownlint-cli']
