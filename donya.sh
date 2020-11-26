@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # 1.  Configuring the Environment
 
 # turn on Bash hash functions
@@ -7,6 +8,7 @@ set +h
 umask 022
 
 #  Use your home directory as the main build directory
+# shellcheck disable=SC2155
 export donyaOS=$(pwd)/donyaOS
 mkdir -pv "${donyaOS}"
 
@@ -207,7 +209,7 @@ base_dir=$(pwd)
 mkdir -p "$base_dir"/{packages,extracted}
 
 
-## download dependancies
+## download dependencies
 
 wget -nc -i packages-list.txt -P packages/
 
@@ -250,9 +252,11 @@ unset CXXFLAGS
 
 # define the most vital parts of the host/target variables needed to create the cross-compiler toolchain and target image:
 
+# shellcheck disable=SC2155,SC2001
 export donyaOS_HOST=$(echo "${MACHTYPE}" | sed "s/-[^-]*/-cross/")
 export donyaOS_TARGET=x86_64-unknown-linux-gnu
 export donyaOS_CPU=k8
+# shellcheck disable=SC2155
 export donyaOS_ARCH=$(echo ${donyaOS_TARGET} | sed -e 's/-.*//' -e 's/i.86/i386/')
 export donyaOS_ENDIAN=little
 
@@ -347,7 +351,7 @@ AR=ar LDFLAGS="-Wl,-rpath,${donyaOS}/cross-tools/lib" \
 make all-gcc all-target-libgcc && \
 make install-gcc install-target-libgcc
 
-ln -vs libgcc.a `${donyaOS_TARGET}-gcc -print-libgcc-file-name | sed 's/libgcc/&_eh/'`
+ln -vs libgcc.a "$(${donyaOS_TARGET}-gcc -print-libgcc-file-name | sed 's/libgcc/&_eh/')"
 
 # Glibc
 
@@ -362,6 +366,7 @@ cd glibc-build/ || exit
 # Configure the following build flags:
 
 echo "libc_cv_forced_unwind=yes" > config.cache
+# shellcheck disable=SC2129
 echo "libc_cv_c_cleanup=yes" >> config.cache
 echo "libc_cv_ssp=no" >> config.cache
 echo "libc_cv_ssp_strong=no" >> config.cache
@@ -400,8 +405,8 @@ AR=ar LDFLAGS="-Wl,-rpath,${donyaOS}/cross-tools/lib" \
 --disable-nls --enable-shared \
 --enable-languages=c,c++ --enable-c99 \
 --enable-long-long \
---with-mpfr-include=$(pwd)/../gcc-10.2.0/mpfr/src \
---with-mpfr-lib=$(pwd)/mpfr/src/.libs \
+--with-mpfr-include="$(pwd)"/../gcc-10.2.0/mpfr/src \
+--with-mpfr-lib="$(pwd)"/mpfr/src/.libs \
 --disable-multilib --with-arch=${donyaOS_CPU}
 
 make && make install
@@ -550,7 +555,7 @@ sudo chmod 4755 "${donyaOS}"-copy/bin/busybox
 
 cd "${donyaOS}"-copy/ || exit
 
-sudo tar cfJ ../donyaOS-build.tar.xz *
+sudo tar cfJ ../donyaOS-build.tar.xz ./*
 
 #########################################################################################################
 
@@ -577,7 +582,7 @@ sudo tar cfJ ../donyaOS-build.tar.xz *
 
 
 
-# 5. Create patition and boot
+# 5. Create partition and boot
 
 # cat /proc/partitions
 
@@ -587,7 +592,7 @@ sudo tar cfJ ../donyaOS-build.tar.xz *
 # use `/dev/sdb` to boot OS
 
 
-# Create a partiotion on it
+# Create a partition on it
 
 # sudo fdisk -l /dev/sdb , fdisk or parted
 
