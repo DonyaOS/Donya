@@ -8,7 +8,7 @@ umask 022
 
 #  Use your home directory as the main build directory
 export donyaOS=$(pwd)/donyaOS
-mkdir -pv ${donyaOS}
+mkdir -pv "${donyaOS}"
 
 export LC_ALL=POSIX
 export PATH=${donyaOS}/cross-tools/bin:/bin:/usr/bin
@@ -18,38 +18,38 @@ export PATH=${donyaOS}/cross-tools/bin:/bin:/usr/bin
 # This directory tree is based on the Filesystem Hierarchy Standard (FHS), which is defined and hosted by the Linux Foundation
 
 
-mkdir -pv ${donyaOS}/{bin,boot{,grub},dev,{etc/,}opt,home,lib/{firmware,modules},lib64,mnt}
-mkdir -pv ${donyaOS}/{proc,media/{floppy,cdrom},sbin,srv,sys}
-mkdir -pv ${donyaOS}/var/{lock,log,mail,run,spool}
-mkdir -pv ${donyaOS}/var/{opt,cache,lib/{misc,locate},local}
+mkdir -pv "${donyaOS}"/{bin,boot{,grub},dev,{etc/,}opt,home,lib/{firmware,modules},lib64,mnt}
+mkdir -pv "${donyaOS}"/{proc,media/{floppy,cdrom},sbin,srv,sys}
+mkdir -pv "${donyaOS}"/var/{lock,log,mail,run,spool}
+mkdir -pv "${donyaOS}"/var/{opt,cache,lib/{misc,locate},local}
 
-install -dv -m 0750 ${donyaOS}/root
-install -dv -m 1777 ${donyaOS}{/var,}/tmp
-install -dv ${donyaOS}/etc/init.d
+install -dv -m 0750 "${donyaOS}"/root
+install -dv -m 1777 "${donyaOS}"{/var,}/tmp
+install -dv "${donyaOS}"/etc/init.d
 
-mkdir -pv ${donyaOS}/usr/{,local/}{bin,include,lib{,64},sbin,src}
-mkdir -pv ${donyaOS}/usr/{,local/}share/{doc,info,locale,man}
-mkdir -pv ${donyaOS}/usr/{,local/}share/{misc,terminfo,zoneinfo}
-mkdir -pv ${donyaOS}/usr/{,local/}share/man/man{1,2,3,4,5,6,7,8}
+mkdir -pv "${donyaOS}"/usr/{,local/}{bin,include,lib{,64},sbin,src}
+mkdir -pv "${donyaOS}"/usr/{,local/}share/{doc,info,locale,man}
+mkdir -pv "${donyaOS}"/usr/{,local/}share/{misc,terminfo,zoneinfo}
+mkdir -pv "${donyaOS}"/usr/{,local/}share/man/man{1,2,3,4,5,6,7,8}
 
 for dir in ${donyaOS}/usr{,/local}; do
-    ln -sv share/{man,doc,info} ${dir}
+    ln -sv share/{man,doc,info} "${dir}"
 done
 
 
 # Create the directory for a cross-compilation toolchain
-install -dv ${donyaOS}/cross-tools{,/bin}
+install -dv "${donyaOS}"/cross-tools{,/bin}
 
 # Use a symlink to /proc/mounts to maintain a list of mounted filesystems properly in the /etc/mtab file
-ln -svf /proc/mounts ${donyaOS}/etc/mtab
+ln -svf /proc/mounts "${donyaOS}"/etc/mtab
 
 # Then create the /etc/passwd file, listing the root user account (note: for now, you won't be setting the account password; you'll do that after booting up into the target image for the first time)
-cat > ${donyaOS}/etc/passwd << "EOF"
+cat > "${donyaOS}"/etc/passwd << "EOF"
 root::0:0:root:/root:/bin/ash
 EOF
 
-# Create the /etc/group file with the following command: 
-cat > ${donyaOS}/etc/group << "EOF"
+# Create the /etc/group file with the following command:
+cat > "${donyaOS}"/etc/group << "EOF"
 root:x:0:
 bin:x:1:
 sys:x:2:
@@ -64,7 +64,7 @@ usb:x:14:
 EOF
 
 # The target system's /etc/fstab
-cat > ${donyaOS}/etc/fstab << "EOF"
+cat > "${donyaOS}"/etc/fstab << "EOF"
 # file system  mount-point  type   options          dump  fsck
 #                                                         order
 rootfs          /               auto    defaults        1      1
@@ -75,7 +75,7 @@ tmpfs           /dev/shm        tmpfs   defaults        0      0
 EOF
 
 # The target system's /etc/profile to be used by the Almquist shell (ash) once the user is logged in to the target machine
-cat > ${donyaOS}/etc/profile << "EOF"
+cat > "${donyaOS}"/etc/profile << "EOF"
 export PATH=/bin:/usr/bin
 if [ `id -u` -eq 0 ] ; then
     PATH=/bin:/sbin:/usr/bin:/usr/sbin
@@ -91,20 +91,20 @@ export PAGER='/bin/more '
 export EDITOR='/bin/vi'
 EOF
 
-# The target machine's hostname (you can change this any time): 
-echo "donyaOS-machine" > ${donyaOS}/etc/HOSTNAME
+# The target machine's hostname (you can change this any time):
+echo "donyaOS-machine" > "${donyaOS}"/etc/HOSTNAME
 
 
-# And, /etc/issue, which will be displayed prominently at the login prompt: 
-cat > ${donyaOS}/etc/issue<< "EOF"
+# And, /etc/issue, which will be displayed prominently at the login prompt:
+cat > "${donyaOS}"/etc/issue<< "EOF"
 donyaOS 0.001a
 Kernel \r on an \m
 EOF
 
 
-# You won't use systemd here (this wasn't a political decision; it's due to convenience and for simplicity's sake). Instead, you'll use the basic init process provided by BusyBox. This requires that you define an /etc/inittab file: 
+# You won't use systemd here (this wasn't a political decision; it's due to convenience and for simplicity's sake). Instead, you'll use the basic init process provided by BusyBox. This requires that you define an /etc/inittab file:
 
-cat > ${donyaOS}/etc/inittab<< "EOF"
+cat > "${donyaOS}"/etc/inittab<< "EOF"
 ::sysinit:/etc/rc.d/startup
 tty1::respawn:/sbin/getty 38400 tty1
 tty2::respawn:/sbin/getty 38400 tty2
@@ -118,7 +118,7 @@ EOF
 
 # Also as a result of leveraging BusyBox to simplify some of the most common Linux system functionality # you'll use mdev instead of udev, which requires you to define the following /etc/mdev.conf file:
 
-cat > ${donyaOS}/etc/mdev.conf<< "EOF"
+cat > "${donyaOS}"/etc/mdev.conf<< "EOF"
 # Devices:
 # Syntax: %s %d:%d %s
 # devices user:group mode
@@ -171,14 +171,14 @@ usbdev[0-9].[0-9]_.*    root:root 0660
 EOF
 
 
-# You'll need to create a /boot/grub/grub.cfg for the GRUB bootloader that will be installed on the target machine's physical or virtual HDD (note: the kernel image defined in this file needs to reflect the image built and installed on the target machine): 
+# You'll need to create a /boot/grub/grub.cfg for the GRUB bootloader that will be installed on the target machine's physical or virtual HDD (note: the kernel image defined in this file needs to reflect the image built and installed on the target machine):
 
 ### This is what I add
-mkdir ${donyaOS}/boot/grub/
+mkdir "${donyaOS}"/boot/grub/
 ###$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
-cat > ${donyaOS}/boot/grub/grub.cfg<< "EOF"
+cat > "${donyaOS}"/boot/grub/grub.cfg<< "EOF"
 set default=0
 set timeout=5
 set root=(hd0,1)
@@ -188,10 +188,10 @@ menuentry "donyaOS 0.001a" {
 EOF
 
 
-# Finally, initialize the log files and give them proper permissions: 
+# Finally, initialize the log files and give them proper permissions:
 
-touch ${donyaOS}/var/run/utmp ${donyaOS}/var/log/{btmp,lastlog,wtmp}
-chmod -v 664 ${donyaOS}/var/run/utmp ${donyaOS}/var/log/lastlog
+touch "${donyaOS}"/var/run/utmp "${donyaOS}"/var/log/{btmp,lastlog,wtmp}
+chmod -v 664 "${donyaOS}"/var/run/utmp "${donyaOS}"/var/log/lastlog
 
 
 # 2. Build the Cross Compiler
@@ -218,7 +218,7 @@ tar -xvf "$base_dir/packages/busybox-1.32.0.tar.bz2" -C "$base_dir/extracted"
 # linux
 tar -xvf "$base_dir/packages/linux-5.8.tar.xz" -C "$base_dir/extracted"
 
-# init 
+# init
 tar -xvf "$base_dir/packages/clfs-embedded-bootscripts-1.0-pre5.tar.bz2" -C "$base_dir/extracted"
 
 # binutils
@@ -250,7 +250,7 @@ unset CXXFLAGS
 
 # define the most vital parts of the host/target variables needed to create the cross-compiler toolchain and target image:
 
-export donyaOS_HOST=$(echo ${MACHTYPE} | sed "s/-[^-]*/-cross/")
+export donyaOS_HOST=$(echo "${MACHTYPE}" | sed "s/-[^-]*/-cross/")
 export donyaOS_TARGET=x86_64-unknown-linux-gnu
 export donyaOS_CPU=k8
 export donyaOS_ARCH=$(echo ${donyaOS_TARGET} | sed -e 's/-.*//' -e 's/i.86/i386/')
@@ -262,7 +262,7 @@ export donyaOS_ENDIAN=little
 
 # # Kernel Headers
 
-# # The kernel's standard header files need to be installed for the cross compiler. Uncompress the kernel tarball and change into its directory. Then run: 
+# # The kernel's standard header files need to be installed for the cross compiler. Uncompress the kernel tarball and change into its directory. Then run:
 
 echo "########Compile linux##########"
 
@@ -278,46 +278,46 @@ export MAKEFLAGS="-j$((NB_CORES+1)) -l${NB_CORES}"
 ###Headers
 # make clean
 
-make mrproper 
-make ARCH=${donyaOS_ARCH} headers_check
-make ARCH=${donyaOS_ARCH} INSTALL_HDR_PATH=dest headers_install
+make mrproper
+make ARCH="${donyaOS_ARCH}" headers_check
+make ARCH="${donyaOS_ARCH}" INSTALL_HDR_PATH=dest headers_install
 
-cp -rv dest/include/* ${donyaOS}/usr/include
+cp -rv dest/include/* "${donyaOS}"/usr/include
 ############################################
 
 
 
 # Binutils
 
-# Binutils contains a linker, assembler and other tools needed to handle compiled object files. Uncompress the tarball. Then create the binutils-build directory and change into it: 
+# Binutils contains a linker, assembler and other tools needed to handle compiled object files. Uncompress the tarball. Then create the binutils-build directory and change into it:
 
 cd "$base_dir/extracted" || exit 1
 
 # cd binutils* || exit 1
 
 mkdir binutils-build
-cd binutils-build/
+cd binutils-build/ || exit
 
-../binutils-2.35/configure --prefix=${donyaOS}/cross-tools \
---target=${donyaOS_TARGET} --with-sysroot=${donyaOS} \
+../binutils-2.35/configure --prefix="${donyaOS}"/cross-tools \
+--target=${donyaOS_TARGET} --with-sysroot="${donyaOS}" \
 --disable-nls --enable-shared --disable-multilib
 
 make configure-host && make
 
-ln -sv lib ${donyaOS}/cross-tools/lib64
+ln -sv lib "${donyaOS}"/cross-tools/lib64
 
 make install
 
 
 # Copy over the following header file to the target's filesystem:
-cp -v ../binutils-2.35/include/libiberty.h ${donyaOS}/usr/include
+cp -v ../binutils-2.35/include/libiberty.h "${donyaOS}"/usr/include
 
 
 #GCC (Static)
 
 # Before building the final cross-compiler toolchain, you first must build a statically compiled toolchain to build the C library (glibc) to which the final GCC cross compiler will link.
 
-# Uncompress the GCC tarball, and then uncompress the following packages and move them into the GCC root directory: 
+# Uncompress the GCC tarball, and then uncompress the following packages and move them into the GCC root directory:
 
 cd "$base_dir/extracted" || exit 1
 
@@ -328,13 +328,13 @@ cp -r mpc* gcc-10.2.0/mpc
 
 
 mkdir gcc-static
-cd gcc-static/
+cd gcc-static/ || exit
 
 AR=ar LDFLAGS="-Wl,-rpath,${donyaOS}/cross-tools/lib" \
-../gcc-10.2.0/configure --prefix=${donyaOS}/cross-tools \
---build=${donyaOS_HOST} --host=${donyaOS_HOST} \
+../gcc-10.2.0/configure --prefix="${donyaOS}"/cross-tools \
+--build="${donyaOS_HOST}" --host="${donyaOS_HOST}" \
 --target=${donyaOS_TARGET} \
---with-sysroot=${donyaOS}/target --disable-nls \
+--with-sysroot="${donyaOS}"/target --disable-nls \
 --disable-shared \
 --with-mpfr-include=../gcc-10.2.0/mpfr/src \
 --with-mpfr-lib=../gcc-10.2.0/mpfr/src/.libs \
@@ -351,13 +351,13 @@ ln -vs libgcc.a `${donyaOS_TARGET}-gcc -print-libgcc-file-name | sed 's/libgcc/&
 
 # Glibc
 
-# Uncompress the glibc tarball. Then create the glibc-build directory and change into it: 
+# Uncompress the glibc tarball. Then create the glibc-build directory and change into it:
 
 cd "$base_dir/extracted" || exit 1
 
 
 mkdir glibc-build
-cd glibc-build/
+cd glibc-build/ || exit
 
 # Configure the following build flags:
 
@@ -372,31 +372,31 @@ BUILD_CC="gcc" CC="${donyaOS_TARGET}-gcc" \
 AR="${donyaOS_TARGET}-ar" \
 RANLIB="${donyaOS_TARGET}-ranlib" CFLAGS="-O2" \
 ../glibc-2.32/configure --prefix=/usr \
---host=${donyaOS_TARGET} --build=${donyaOS_HOST} \
+--host=${donyaOS_TARGET} --build="${donyaOS_HOST}" \
 --disable-profile --enable-add-ons --with-tls \
 --enable-kernel=2.6.32 --with-__thread \
---with-binutils=${donyaOS}/cross-tools/bin \
---with-headers=${donyaOS}/usr/include \
+--with-binutils="${donyaOS}"/cross-tools/bin \
+--with-headers="${donyaOS}"/usr/include \
 --cache-file=config.cache
 
-make && make install_root=${donyaOS}/ install
+make && make install_root="${donyaOS}"/ install
 
 
 # This part problematic but work if copy paste commands
 
 # GCC (Final)
 
-# As I mentioned previously, you'll now build the final GCC cross compiler that will link to the C library built and installed in the previous step. Create the gcc-build directory and change into it: 
+# As I mentioned previously, you'll now build the final GCC cross compiler that will link to the C library built and installed in the previous step. Create the gcc-build directory and change into it:
 
 cd "$base_dir/extracted" || exit 1
 
 mkdir gcc-build
-cd gcc-build/
+cd gcc-build/ || exit
 
 AR=ar LDFLAGS="-Wl,-rpath,${donyaOS}/cross-tools/lib" \
-../gcc-10.2.0/configure --prefix=${donyaOS}/cross-tools \
---build=${donyaOS_HOST} --target=${donyaOS_TARGET} \
---host=${donyaOS_HOST} --with-sysroot=${donyaOS} \
+../gcc-10.2.0/configure --prefix="${donyaOS}"/cross-tools \
+--build="${donyaOS_HOST}" --target=${donyaOS_TARGET} \
+--host="${donyaOS_HOST}" --with-sysroot="${donyaOS}" \
 --disable-nls --enable-shared \
 --enable-languages=c,c++ --enable-c99 \
 --enable-long-long \
@@ -406,24 +406,24 @@ AR=ar LDFLAGS="-Wl,-rpath,${donyaOS}/cross-tools/lib" \
 
 make && make install
 
-cp -v ${donyaOS}/cross-tools/${donyaOS_TARGET}/lib64/libgcc_s.so.1 ${donyaOS}/lib64
+cp -v "${donyaOS}"/cross-tools/${donyaOS_TARGET}/lib64/libgcc_s.so.1 "${donyaOS}"/lib64
 
 
 ###################################################################################################
 
 #3. Building the Target Image
 
-# The hard part is now complete—you have the cross compiler. Now, let's focus on building the components that will be installed on the target image. This includes various libraries and utilities and, of course, the Linux kernel itself. 
+# The hard part is now complete—you have the cross compiler. Now, let's focus on building the components that will be installed on the target image. This includes various libraries and utilities and, of course, the Linux kernel itself.
 
 
 # BusyBox
 
-# Uncompress the tarball and change into its directory. Then load the default compilation configuration template: 
+# Uncompress the tarball and change into its directory. Then load the default compilation configuration template:
 
 
 cd "$base_dir/extracted" || exit 1
 
-cd busybox*
+cd busybox* || exit
 
 make CROSS_COMPILE="${donyaOS_TARGET}-" defconfig
 
@@ -433,56 +433,56 @@ make CROSS_COMPILE="${donyaOS_TARGET}-" CONFIG_PREFIX="${donyaOS}" install
 
 # Install the following Perl script, as you'll need it for the kernel build below:
 
-cp -v examples/depmod.pl ${donyaOS}/cross-tools/bin
-chmod 755 ${donyaOS}/cross-tools/bin/depmod.pl
+cp -v examples/depmod.pl "${donyaOS}"/cross-tools/bin
+chmod 755 "${donyaOS}"/cross-tools/bin/depmod.pl
 
 
 ## The Linux Kernel
 
-# Change into the kernel package directory and run the following to set the default x86-64 configuration template: 
+# Change into the kernel package directory and run the following to set the default x86-64 configuration template:
 
 cd "$base_dir/extracted" || exit 1
 
-cd linux*
+cd linux* || exit
 
 
-make ARCH=${donyaOS_ARCH} \
+make ARCH="${donyaOS_ARCH}" \
 CROSS_COMPILE=${donyaOS_TARGET}- x86_64_defconfig
 
 
-make ARCH=${donyaOS_ARCH} CROSS_COMPILE=${donyaOS_TARGET}-
+make ARCH="${donyaOS_ARCH}" CROSS_COMPILE=${donyaOS_TARGET}-
 
-make ARCH=${donyaOS_ARCH} CROSS_COMPILE=${donyaOS_TARGET}- \
-INSTALL_MOD_PATH=${donyaOS} modules_install
+make ARCH="${donyaOS_ARCH}" CROSS_COMPILE=${donyaOS_TARGET}- \
+INSTALL_MOD_PATH="${donyaOS}" modules_install
 
 
 # You'll need to copy a few files into the /boot directory for GRUB:
 
-cp -v arch/x86/boot/bzImage ${donyaOS}/boot/vmlinuz-5.8.0
-cp -v System.map ${donyaOS}/boot/System.map-5.8.0
-cp -v .config ${donyaOS}/boot/config-5.8.0
+cp -v arch/x86/boot/bzImage "${donyaOS}"/boot/vmlinuz-5.8.0
+cp -v System.map "${donyaOS}"/boot/System.map-5.8.0
+cp -v .config "${donyaOS}"/boot/config-5.8.0
 
 
 # Then run the previously installed Perl script provided by the BusyBox package:
 
-${donyaOS}/cross-tools/bin/depmod.pl \
--F ${donyaOS}/boot/System.map-5.8.0 \
--b ${donyaOS}/lib/modules/5.8.0
+"${donyaOS}"/cross-tools/bin/depmod.pl \
+-F "${donyaOS}"/boot/System.map-5.8.0 \
+-b "${donyaOS}"/lib/modules/5.8.0
 
 #####################################################################################
 
 
-# The Bootscripts 
+# The Bootscripts
 
-cd "$base_dir/extracted" 
+cd "$base_dir/extracted" || exit
 
-cd clfs* 
+cd clfs* || exit
 
 # copy edited Make
-cp $base_dir/Makefile "$base_dir/extracted"/clfs*
+cp "$base_dir"/Makefile "$base_dir/extracted"/clfs*
 
-make DESTDIR=${donyaOS}/ install-bootscripts
-ln -sv ../rc.d/startup ${donyaOS}/etc/init.d/rcS
+make DESTDIR="${donyaOS}"/ install-bootscripts
+ln -sv ../rc.d/startup "${donyaOS}"/etc/init.d/rcS
 
 #####################################################################################
 
@@ -491,21 +491,21 @@ ln -sv ../rc.d/startup ${donyaOS}/etc/init.d/rcS
 # Uncompress the Zlib tarball and change into its directory. Then configure, build and install the package:
 
 
-cd "$base_dir/extracted" 
+cd "$base_dir/extracted" || exit
 
-cd zlib* 
+cd zlib* || exit
 
 sed -i 's/-O3/-Os/g' configure
 ./configure --prefix=/usr --shared
-make && make DESTDIR=${donyaOS}/ install
+make && make DESTDIR="${donyaOS}"/ install
 
 
 # Now, because some packages may look for Zlib libraries in the /lib directory instead of the /lib64 directory, apply the following changes:
 
-mv -v ${donyaOS}/usr/lib/libz.so.* ${donyaOS}/lib
-ln -svf ../../lib/libz.so.1 ${donyaOS}/usr/lib/libz.so
-ln -svf ../../lib/libz.so.1 ${donyaOS}/usr/lib/libz.so.1
-ln -svf ../lib/libz.so.1 ${donyaOS}/lib64/libz.so.1
+mv -v "${donyaOS}"/usr/lib/libz.so.* "${donyaOS}"/lib
+ln -svf ../../lib/libz.so.1 "${donyaOS}"/usr/lib/libz.so
+ln -svf ../../lib/libz.so.1 "${donyaOS}"/usr/lib/libz.so.1
+ln -svf ../lib/libz.so.1 "${donyaOS}"/lib64/libz.so.1
 
 
 #####################################################################################
@@ -513,42 +513,42 @@ ln -svf ../lib/libz.so.1 ${donyaOS}/lib64/libz.so.1
 
 # 4. Installing the Target Image
 
-# All of the cross compilation is complete. Now you have everything you need to install the entire cross-compiled operating system to either a physical or virtual drive, but before doing that, let's not tamper with the original target build directory by making a copy of it: 
+# All of the cross compilation is complete. Now you have everything you need to install the entire cross-compiled operating system to either a physical or virtual drive, but before doing that, let's not tamper with the original target build directory by making a copy of it:
 
-mkdir -pv ${donyaOS}-copy
-cp -rf ${donyaOS}/* ${donyaOS}-copy
+mkdir -pv "${donyaOS}"-copy
+cp -rf "${donyaOS}"/* "${donyaOS}"-copy
 
-rm -rfv ${donyaOS}-copy/cross-tools
-rm -rfv ${donyaOS}-copy/usr/src/*
+rm -rfv "${donyaOS}"-copy/cross-tools
+rm -rfv "${donyaOS}"-copy/usr/src/*
 
-# Followed by the now unneeded statically compiled library files (if any): 
+# Followed by the now unneeded statically compiled library files (if any):
 
-FILES="$(ls ${donyaOS}-copy/usr/lib64/*.a)"
+FILES="$(ls "${donyaOS}"-copy/usr/lib64/*.a)"
 for file in $FILES; do
-rm -f $file
+rm -f "$file"
 done
 
 
 # Now strip all debug symbols from the installed binaries. This will reduce overall file sizes and keep the target image's overall footprint to a minimum:
 
 
-find ${donyaOS}-copy/{,usr/}{bin,lib,sbin} -type f -exec sudo strip --strip-debug '{}' ';'
+find "${donyaOS}"-copy/{,usr/}{bin,lib,sbin} -type f -exec sudo strip --strip-debug '{}' ';'
 
-find ${donyaOS}-copy/{,usr/}lib64 -type f -exec sudo strip --strip-debug '{}' ';'
+find "${donyaOS}"-copy/{,usr/}lib64 -type f -exec sudo strip --strip-debug '{}' ';'
 
 
-# Finally, change file ownerships and create the following nodes: 
+# Finally, change file ownerships and create the following nodes:
 
-sudo chown -R root:root ${donyaOS}-copy
-sudo chgrp 13 ${donyaOS}-copy/var/run/utmp ${donyaOS}-copy/var/log/lastlog
-sudo mknod -m 0666 ${donyaOS}-copy/dev/null c 1 3
-sudo mknod -m 0600 ${donyaOS}-copy/dev/console c 5 1
-sudo chmod 4755 ${donyaOS}-copy/bin/busybox
+sudo chown -R root:root "${donyaOS}"-copy
+sudo chgrp 13 "${donyaOS}"-copy/var/run/utmp "${donyaOS}"-copy/var/log/lastlog
+sudo mknod -m 0666 "${donyaOS}"-copy/dev/null c 1 3
+sudo mknod -m 0600 "${donyaOS}"-copy/dev/console c 5 1
+sudo chmod 4755 "${donyaOS}"-copy/bin/busybox
 
 
 # Change into the target copy directory to create a tarball of the entire operating system image:
 
-cd ${donyaOS}-copy/
+cd "${donyaOS}"-copy/ || exit
 
 sudo tar cfJ ../donyaOS-build.tar.xz *
 
