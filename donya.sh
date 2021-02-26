@@ -183,10 +183,15 @@ mkdir "${donyaOS}"/boot/grub/
 cat > "${donyaOS}"/boot/grub/grub.cfg<< "EOF"
 set default=0
 set timeout=5
-set root=(hd0,1)
+insmod part_msdos
+insmod ext2
+
+set root='hd0,msdos1'
+
 menuentry "donyaOS 0.001a" {
-        linux   /boot/vmlinuz-5.8.0 root=/dev/sda1 ro quiet
+        linux   /boot/vmlinuz-5.8.0 root=/dev/sdb1 ro quiet
 }
+
 EOF
 
 
