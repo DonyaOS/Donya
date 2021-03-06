@@ -114,6 +114,43 @@ udhcpd, umount, uname, uncompress, unexpand, uniq, unix2dos, unlzma,
 unxz, unzip, uptime, usleep, uudecode, uuencode, vconfig, vi, watch,
 watchdog, wc, wget, which, who, whoami, xargs, xz, xzcat, yes, zcat
 ```
+## lfs donyaOS
+
+We have build [linux from scratch](http://linuxfromscratch.org/lfs/view/stable/index.html) version of donyaOS.
+
+[get donyaOS-lfs](https://ufile.io/sgea1rxg)
+
+We highly recommend to use a virtual machine guest OS to save real machine.
+
+This method testd on debian buster net-install with an extra hard disk to install donyOS-lfs on it.
+ 
+We want to use `/dev/sdb` device 
+The extra partion is `/dev/sdb1` 
+
+- Create new partiotion on target device 
+
+`fdisk /dev/sdb`
+with these switches
+o, n, p, a
+
+- format new partition 
+
+`mkfs.ext4 /dev/sdb1`
+
+- mount partiotion
+
+`mount /dev/sdb1 /mnt `
+
+Copy donyaOS-lfs image to partition
+
+`cd /mnt
+tar xvf ~/donyaOS_backup.tar.xz .`
+
+- Update grub to find new distro
+
+`# update-grub2`
+
+In next boot you can login to **donyaOS-lfs** from grub menu.
 
 ## Contribution
 
