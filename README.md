@@ -152,6 +152,8 @@ tar xvf ~/donyaOS_backup.tar.xz .`
 
 In next boot you can login to **donyaOS-lfs** from grub menu.
 
+![DonyaOS-lfs in VirtualBox](donyaOS-lfs.gif)
+
 ## Contribution
 
 Please make sure to read the [Contributing Guide](CONTRIBUTING.md) before making a pull request. If you have a Donya-related project/feature/tool, add it with a pull request to this curated list!
