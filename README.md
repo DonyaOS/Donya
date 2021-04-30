@@ -12,11 +12,11 @@
 - [Team members](#team-members)
 - [License](#license)
 
-Donya Operating system, Yet Another Linux distro built using package management system.
+Donya Operating system, Yet Another Linux distro built using a package management system.
 
 Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
 
-> This Linux distribution is not yet ready, we need the help of others.  **Join team by send a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
+> This Linux distribution is not yet ready, we need the help of others.  **Join the team by sending a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
 
 ![Donya OS](images/demo.jpg)
 
@@ -26,13 +26,13 @@ Unlike a binary software distribution, the source code is compiled locally accor
 
 Produced ISO file: [DonyaOS.iso](DonyaOS.iso) (In development mode)
 
-## DonyaOS Installation guide
+## DonyaOS Installation Guide
 
 ### Install Donya
 
-Just only use compressed package `donyaOS-build.tar.xz`
+Just only use the compressed package `donyaOS-build.tar.xz`
 
-Suppose we have another hard disk `sdb` to install donyaOS on it
+Suppose we have another hard disk `sdb` to install donyaOS on it.
 Create a 100 MB partition in it.
 
 ![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
@@ -114,34 +114,35 @@ udhcpd, umount, uname, uncompress, unexpand, uniq, unix2dos, unlzma,
 unxz, unzip, uptime, usleep, uudecode, uuencode, vconfig, vi, watch,
 watchdog, wc, wget, which, who, whoami, xargs, xz, xzcat, yes, zcat
 ```
+
 ## lfs donyaOS
 
 We have build [linux from scratch](http://linuxfromscratch.org/lfs/view/stable/index.html) version of donyaOS.
 
 [get donyaOS-lfs](https://ufile.io/sgea1rxg)
 
-We highly recommend to use a virtual machine guest OS to save real machine.
+We highly recommend using a virtual machine guest OS to save real machine.
 
-This method testd on debian buster net-install with an extra hard disk to install donyOS-lfs on it.
- 
-We want to use `/dev/sdb` device 
-The extra partion is `/dev/sdb1` 
+This method tested on debian buster net-install with an extra hard disk to install **donyOS-lfs** on it.
 
-- Create new partiotion on target device 
+We want to use `/dev/sdb` device
+The extra partition is `/dev/sdb1`
+
+- Create new partition on target device
 
 `fdisk /dev/sdb`
 with these switches
 o, n, p, a
 
-- format new partition 
+- format new partition
 
 `mkfs.ext4 /dev/sdb1`
 
-- mount partiotion
+- mount partition
 
-`mount /dev/sdb1 /mnt `
+`mount /dev/sdb1 /mnt`
 
-Copy donyaOS-lfs image to partition
+Copy **donyaOS-lfs** image to partition
 
 `cd /mnt
 tar xvf ~/donyaOS_backup.tar.xz .`
@@ -150,23 +151,24 @@ tar xvf ~/donyaOS_backup.tar.xz .`
 
 `# update-grub2`
 
-In next boot you can login to **donyaOS-lfs** from grub menu.
+In next boot you can log in to **donyaOS-lfs** from the grub menu.
 
 ![DonyaOS-lfs in VirtualBox](donyaOS-lfs.gif)
 
 ## Contribution
 
-Please make sure to read the [Contributing Guide](CONTRIBUTING.md) before making a pull request. If you have a Donya-related project/feature/tool, add it with a pull request to this curated list!
+Please make sure to read the [Contributing Guide](CONTRIBUTING.md) before making a pull request.
+If you have a Donya-related project/feature/tool, add it with a pull request to this curated list!
 
 Thank you to all the people who already contributed to DonyaOS!
 
-**Join team by send a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
+**Join the team by sending a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
 
 ## Team members
 
-EsmaeelE, Prince Kumar, Emil Sayahi, Iniubong Obonguko, Hooman and Max Base
+EsmaeelE, Prince Kumar, Emil Sayahi, Iniubong Obonguko, Hooman, John Bampton and Max Base
 
 ## License
 
 MIT License Copyright (c) 2020-present, Max Base
-Donya OS community
+Donya OS Community

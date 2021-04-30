@@ -1,0 +1,19 @@
+name: Lint Code Base
+
+on: [pull_request]
+
+jobs:
+  build:
+    name: GitHub Super Linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: github/super-linter@v3
+        env:
+          ERROR_ON_MISSING_EXEC_BIT: true
+          VALIDATE_BASH: true
+          # VALIDATE_BASH_EXEC: true
+          # VALIDATE_EDITORCONFIG: true
+          VALIDATE_MARKDOWN: true
+          VALIDATE_YAML: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
