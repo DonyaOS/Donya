@@ -20,7 +20,7 @@ create-dirs:
 	install -d -m ${DIRMODE} ${EXTDIR}/rc.d/stop
 
 install-bootscripts: create-dirs
-	install -m ${CONFMODE} clfs/rc.d/init.d/functions ${EXTDIR}/rc.d/init.d/	
+	install -m ${CONFMODE} clfs/rc.d/init.d/functions ${EXTDIR}/rc.d/init.d/
 
 install-bootscripts: create-dirs
 	install -m ${CONFMODE} clfs/rc.d/init.d/functions ${EXTDIR}/rc.d/init.d/
