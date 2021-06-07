@@ -1,6 +1,6 @@
 # Donya OS
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![MIT License](https://img.shields.io/github/license/DonyaOS/Donya?color=brightgreen)](LICENSE)
@@ -189,6 +189,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/jbampton"><img src="https://avatars.githubusercontent.com/u/418747?v=4?s=100" width="100px;" alt=""/><br /><sub><b>John Bampton</b></sub></a><br /><a href="#projectManagement-jbampton" title="Project Management">📆</a></td>
     <td align="center"><a href="https://github.com/esmaeelE"><img src="https://avatars.githubusercontent.com/u/22000310?v=4?s=100" width="100px;" alt=""/><br /><sub><b>EEC</b></sub></a><br /><a href="https://github.com/DonyaOS/Donya/commits?author=esmaeelE" title="Code">💻</a></td>
     <td align="center"><a href="https://Z5483.github.io"><img src="https://avatars.githubusercontent.com/u/52610961?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Khue Nguyen</b></sub></a><br /><a href="https://github.com/DonyaOS/Donya/commits?author=Z5483" title="Code">💻</a></td>
+    <td align="center"><a href="https://allcontributors.org"><img src="https://avatars.githubusercontent.com/u/46410174?v=4?s=100" width="100px;" alt=""/><br /><sub><b>All Contributors</b></sub></a><br /><a href="https://github.com/DonyaOS/Donya/commits?author=all-contributors" title="Documentation">📖</a></td>
   </tr>
 </table>
 
