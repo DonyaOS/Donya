@@ -158,6 +158,33 @@ In next boot you can log in to **donyaOS-lfs** from the grub menu.
 
 ![DonyaOS-lfs in VirtualBox](donyaOS-lfs.gif)
 
+### How to test LFS in virtual machine
+
+After download `lfs.fsa` file
+
+1. Install a linux distro in virtual machine
+(we recommends debian stable netinstall)
+
+2. Add a new hard disk 8GB
+
+3. Boot to distro
+
+4. Partition and format new hdd
+
+- `fdisk` # create partition
+- `mkfs.ext4 /dev/sdb1` # format new created patition
+
+5. Extract `lfs.fsa` to destination partition
+
+- `mount /dev/sdb1 /mnt/ -r` #mount read only
+- `fsarchiver restfs lfs.fsa id=0,dest=/dev/sdb1` #extract
+
+6. Update grub to detect new distro
+
+- `grub2-update`
+
+7. Reboot system
+
 ## Contribution
 
 Please make sure to read the [Contributing Guide](CONTRIBUTING.md) before making a pull request.
