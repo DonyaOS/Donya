@@ -172,7 +172,7 @@ After download `lfs.fsa` file
 4. Partition and format new hdd
 
 - `fdisk` # create partition
-- `mkfs.ext4 /dev/sdb1` # format new created patition
+- `mkfs.ext4 /dev/sdb1` # format new created partition
 
 5. Extract `lfs.fsa` to destination partition
 
