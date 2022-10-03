@@ -1,7 +1,4 @@
 # Donya OS
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![MIT License](https://img.shields.io/github/license/DonyaOS/Donya?color=brightgreen)](LICENSE)
 [![GitHub Linter Workflow Status](https://img.shields.io/github/workflow/status/DonyaOS/Donya/Lint?label=Linter)](#donya-os)
@@ -202,28 +199,3 @@ EsmaeelE, Prince Kumar, Emil Sayahi, Iniubong Obonguko, Hooman, John Bampton and
 
 MIT License Copyright (c) 2020-present, Max Base
 Donya OS Community
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://maxbase.org/"><img src="https://avatars.githubusercontent.com/u/2658040?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Max Base</b></sub></a><br /><a href="https://github.com/DonyaOS/Donya/commits?author=BaseMax" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/jbampton"><img src="https://avatars.githubusercontent.com/u/418747?v=4?s=100" width="100px;" alt=""/><br /><sub><b>John Bampton</b></sub></a><br /><a href="#projectManagement-jbampton" title="Project Management">📆</a></td>
-    <td align="center"><a href="https://github.com/esmaeelE"><img src="https://avatars.githubusercontent.com/u/22000310?v=4?s=100" width="100px;" alt=""/><br /><sub><b>EEC</b></sub></a><br /><a href="https://github.com/DonyaOS/Donya/commits?author=esmaeelE" title="Code">💻</a></td>
-    <td align="center"><a href="https://Z5483.github.io"><img src="https://avatars.githubusercontent.com/u/52610961?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Khue Nguyen</b></sub></a><br /><a href="https://github.com/DonyaOS/Donya/commits?author=Z5483" title="Code">💻</a></td>
-    <td align="center"><a href="https://allcontributors.org"><img src="https://avatars.githubusercontent.com/u/46410174?v=4?s=100" width="100px;" alt=""/><br /><sub><b>All Contributors</b></sub></a><br /><a href="https://github.com/DonyaOS/Donya/commits?author=all-contributors" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://imgbot.net"><img src="https://avatars.githubusercontent.com/u/31427850?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Imgbot</b></sub></a><br /><a href="#design-ImgBotApp" title="Design">🎨</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
