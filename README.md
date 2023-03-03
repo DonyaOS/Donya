@@ -12,11 +12,11 @@
 - [Team members](#team-members)
 - [License](#license)
 
-Donya Operating system, Yet Another Linux distro built using a package management system.
+Donya Operating System, Yet Another Linux distro built using a package management system.
 
 Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
 
-> This Linux distribution is not yet ready, we need the help of others.  **Join the team by sending a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
+> This Linux distribution is not yet ready, we need the help of others. **Join the team by sending a message at [this issue](https://github.com/DonyaOS/Donya/issues/4)**
 
 ![Donya OS](images/demo.jpg)
 
@@ -123,7 +123,7 @@ We have build [linux from scratch](http://linuxfromscratch.org/lfs/view/stable/i
 
 We highly recommend using a virtual machine guest OS to save real machine.
 
-This method tested on debian buster net-install with an extra hard disk to install **donyOS-lfs** on it.
+This method tested on Debian buster net-install with an extra hard disk to install **donyaOS-lfs** on it.
 
 We want to use `/dev/sdb` device
 The extra partition is `/dev/sdb1`
