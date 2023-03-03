@@ -168,17 +168,17 @@ After download `lfs.fsa` file
 
 4. Partition and format new hdd
 
-- `fdisk` # create partition
-- `mkfs.ext4 /dev/sdb1` # format new created partition
+   - `fdisk` # create partition
+   - `mkfs.ext4 /dev/sdb1` # format new created partition
 
 5. Extract `lfs.fsa` to destination partition
 
-- `mount /dev/sdb1 /mnt/ -r` #mount read only
-- `fsarchiver restfs lfs.fsa id=0,dest=/dev/sdb1` #extract
+   - `mount /dev/sdb1 /mnt/ -r` #mount read only
+   - `fsarchiver restfs lfs.fsa id=0,dest=/dev/sdb1` #extract
 
 6. Update grub to detect new distro
 
-- `grub2-update`
+   - `grub2-update`
 
 7. Reboot system
 
