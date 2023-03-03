@@ -1,7 +1,7 @@
 # Donya OS
 
 [![MIT License](https://img.shields.io/github/license/DonyaOS/Donya?color=brightgreen)](LICENSE)
-[![GitHub Linter Workflow Status](https://img.shields.io/github/workflow/status/DonyaOS/Donya/Lint?label=Linter)](#donya-os)
+[![GitHub Super-Linter](https://github.com/DonyaOS/Donya/workflows/Super-Linter/badge.svg)](#donya-os)
 [![IRC chat on freenode](https://img.shields.io/badge/IRC%20chat%20on%20freenode-%23DonyaOS-brightgreen)](#donya-os)
 
 - [Demo Video](#demo-video)
