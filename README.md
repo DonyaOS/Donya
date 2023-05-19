@@ -12,7 +12,7 @@
 - [Team members](#team-members)
 - [License](#license)
 
-Donya Operating System, Yet Another Linux distro built using a package management system.
+Donya Operating System, Yet Another GNU/Linux distro built using a package management system.
 
 Unlike a binary software distribution, the source code is compiled locally according to the user's preferences and is often optimized for the specific type of computer.
 
