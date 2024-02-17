@@ -6,7 +6,7 @@
    * Customize usage for PC and embedded
    * Cross compile Donya
 3. Write Project Roadmap
-4. Write Develpment Plan
+4. Write Development Plan
 5. Generate Useful Documentation
 6. Problems we want to solve
 7. Make Obvious and highly commented scripts
