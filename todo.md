@@ -1,6 +1,6 @@
 # Donya OS todo
 
-1. Write Project Goals 
+1. Write Project Goals
    * Make Donya OS Learning Platform
    * Possible Daily usage
    * Customize usage for PC and embedded
