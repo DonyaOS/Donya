@@ -5,9 +5,9 @@
    * Possible Daily usage
    * Customize usage for PC and embedded
    * Cross compile Donya
-3. Write Project Roadmap
-4. Write Development Plan
-5. Generate Useful Documentation
-6. Problems we want to solve
-7. Make Obvious and highly commented scripts
-8. Active Development Discussion
+2. Write Project Roadmap
+3. Write Development Plan
+4. Generate Useful Documentation
+5. Problems we want to solve
+6. Make Obvious and highly commented scripts
+7. Active Development Discussion
