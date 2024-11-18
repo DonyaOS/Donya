@@ -35,9 +35,27 @@ Just only use the compressed package `donyaOS-build.tar.xz`
 Suppose we have another hard disk `sdb` to install donyaOS on it.
 Create a 100 MB partition in it.
 
+#### Create home for our new OS
+
+```
+DONYA_PATH=$HOME/donayos/
+mkdir -p $DONYA_PATH $DONYA_PATH/donya
+cd $DONYA_PATH
+```
+
+#### Download compressed archive
+```
+wget https://github.com/DonyaOS/Donya/raw/refs/heads/main/donyaOS-build.tar.xz
+sudo tar xvf donyaOS-build.tar.xz -C donya
+```
+
+
 ![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
 
 ### Format
+
+First off all we need a clean storage partition
+If our target partition is `/dev/sdb1`  format with below command.
 
 `sudo mkfs.ext4 /dev/sdb1`
 
