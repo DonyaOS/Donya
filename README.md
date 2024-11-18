@@ -81,16 +81,15 @@ sudo grub-install --root-directory="$DONYA_PATH/donya/ /dev/sdb
 
 ## Build from source
 
-`./donya`
-
-![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
-
 ### Preparation
 
 ```
 ...Download dependency files and decompress or uncomment from donya.sh...
 bash donya.sh
 ```
+
+![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
+
 
 ## Network
 
