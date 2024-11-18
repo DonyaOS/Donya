@@ -1,0 +1,11 @@
+# Automatically label based on file paths
+bug:
+  - "src/**/*.js"
+  - "*.html"
+
+documentation:
+  - "docs/**"
+  - "*.md"
+
+enhancement:
+  - "features/**"
