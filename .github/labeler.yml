@@ -5,11 +5,15 @@ frontend:
   - "src/frontend/**"
   - "*.css"
   - "*.js"
+  - "*.html"
 
 backend:
   - "src/backend/**"
   - "*.py"
   - "*.java"
+  - "*.sh"
+  - "*.bash"
+  - "Makefile"
 
 database:
   - "db/**"
