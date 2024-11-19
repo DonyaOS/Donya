@@ -28,61 +28,58 @@ Produced ISO file: [DonyaOS.iso](DonyaOS.iso) (In development mode)
 
 ## DonyaOS Installation Guide
 
-### Install Donya
+# Installation 
+## Install prebuild Donya (Fastest way to run Donya)
 
-Just only use the compressed package `donyaOS-build.tar.xz`
+You need to use compressed package `donyaOS-build.tar.xz`
 
-Suppose we have another hard disk `sdb` to install donyaOS on it.
-Create a 100 MB partition in it.
+Suppose we have another hard disk `sdb` or partition to install donyaOS on it.
+To run donya we must create a 100 MB partition in it.
 
-#### Create home for our new OS
+### Create home for our new OS
 
 ```
 DONYA_PATH=$HOME/donayos/
 mkdir -p $DONYA_PATH $DONYA_PATH/donya
 cd $DONYA_PATH
 ```
+### Format the partition
 
-#### Download compressed archive
-```
-wget https://github.com/DonyaOS/Donya/raw/refs/heads/main/donyaOS-build.tar.xz
-sudo tar xvf donyaOS-build.tar.xz -C donya
-```
-
-
-![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
-
-### Format
-
-First off all we need a clean storage partition
-If our target partition is `/dev/sdb1`  format with below command.
+If our target partition is `/dev/sdb1` format with below command.
 
 `sudo mkfs.ext4 /dev/sdb1`
 
-### Mount new created `sdb1`
+### Mount new partiotion `sdb1` to file system
 
-`sudo mkdir "$base_dir"/donya_release/`
-`sudo mount /dev/sdb1 "$base_dir"/donya/`
+`sudo mount /dev/sdb1 "$DONYA_PATH"/donya/`
 
-### Extract donyaOS inside it
+### Download and extract donyaOS archive file inside it
 
-`sudo tar xJf ${base_dir}/donyaOS-build.tar.xz -C "$base_dir"/donya/`
+```
+wget https://github.com/DonyaOS/Donya/raw/refs/heads/main/donyaOS-build.tar.xz
+sudo tar xJvf "$DONYA_PATH"/donyaOS-build.tar.xz -C "$DONYA_PATH/donya/
+```
+
 
 ### Install grub in MBR
 
-`sudo grub-install --root-directory="$base_dir"/donya/ /dev/sdb`
+```
+sudo grub-install --root-directory="$DONYA_PATH/donya/ /dev/sdb
+```
 
-### Run with qemu
+### Run Donya with qemu(emulator)
 
 `sudo qemu-system-x86_64 /dev/sdb`
 
-![Installing DonyaOS Qemu Grub](images/qemu2.jpg)
-
-### Build from source
-
-`./donya`
+---
 
 ![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
+
+![Installing DonyaOS Qemu Grub](images/qemu2.jpg)
+
+---
+
+## Build from source
 
 ### Preparation
 
@@ -90,6 +87,9 @@ If our target partition is `/dev/sdb1`  format with below command.
 ...Download dependency files and decompress or uncomment from donya.sh...
 bash donya.sh
 ```
+
+![Installing DonyaOS Qemu Grub](images/qemu1.jpg)
+
 
 ## Network
 
