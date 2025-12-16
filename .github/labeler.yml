@@ -1,0 +1,82 @@
+# ---------------------------
+# Labels based on file paths
+# ---------------------------
+frontend:
+  - "src/frontend/**"
+  - "*.css"
+  - "*.js"
+  - "*.html"
+
+backend:
+  - "src/backend/**"
+  - "*.py"
+  - "*.java"
+  - "*.sh"
+  - "*.bash"
+  - "Makefile"
+
+database:
+  - "db/**"
+  - "*.sql"
+
+tests:
+  - "tests/**"
+  - "*.test.js"
+  - "*.spec.py"
+
+documentation:
+  - "docs/**"
+  - "*.md"
+  - "README.md"
+
+# ---------------------------
+# Labels based on keywords
+# ---------------------------
+bug:
+  - "error"
+  - "bug"
+  - "failed"
+  - "unexpected"
+enhancement:
+  - "feature"
+  - "enhance"
+  - "improvement"
+  - "upgrade"
+documentation:
+  - "docs"
+  - "readme"
+  - "manual"
+
+# ---------------------------
+# Labels based on types
+# ---------------------------
+type/bug:
+  - "*.bugfix"
+type/feature:
+  - "*.feature"
+type/refactor:
+  - "*.refactor"
+
+# ---------------------------
+# Labels based on priority
+# ---------------------------
+priority/high:
+  - "**/critical/**"
+priority/medium:
+  - "**/important/**"
+priority/low:
+  - "**/optional/**"
+
+# ---------------------------
+# Labels based on status
+# ---------------------------
+status/in-progress:
+  - "WIP"
+  - "work in progress"
+  - "incomplete"
+status/review:
+  - "needs review"
+  - "review required"
+status/done:
+  - "completed"
+  - "finished"
